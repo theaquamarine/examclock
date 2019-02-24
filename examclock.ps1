@@ -1,9 +1,11 @@
-﻿[xml]$xaml = Get-Content -Path $PSScriptRoot\examclock.xaml
+﻿Add-Type -AssemblyName PresentationFramework
+
+[xml]$xaml = Get-Content -Path $PSScriptRoot\examclock.xaml
 $window = [Windows.Markup.XamlReader]::Load((New-Object System.Xml.XmlNodeReader $xaml))
 
 $clock = $window.FindName('Clock')
 
-$updateTime = {
+function Update-Time {
     $clock.Text = "$(Get-Date -format 'h:mm')" # 12-hour clock without seconds probably preferable
 }
 
@@ -11,10 +13,10 @@ $window.Add_SourceInitialized({
     $timer = New-Object System.Windows.Threading.DispatcherTimer
     $timer.Interval = New-TimeSpan -Seconds 1
     $timer.Add_Tick({
-        $updateTime.Invoke()
+        Update-Time
     })
     $timer.Start()
-    $updateTime.Invoke()
+    Update-Time
 })
 
 # Attempt to prevent the computer sleeping/turning off the display.
@@ -40,7 +42,7 @@ $ES_DISPLAY_REQUIRED = [uint32]"0x00000002"
 try {
     $ste::SetThreadExecutionState($ES_CONTINUOUS -bor $ES_DISPLAY_REQUIRED)
 
-    $window.ShowDialog()
+    $window.ShowDialog() | Out-Null
 } finally {
     $ste::SetThreadExecutionState($ES_CONTINUOUS)
 }

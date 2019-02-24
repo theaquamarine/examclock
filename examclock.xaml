@@ -30,7 +30,9 @@
         </Viewbox>
 
         <Viewbox Grid.Row="2" Grid.ColumnSpan="3">
-            <TextBox AcceptsReturn="True">Exam details here</TextBox>
+            <TextBox TextAlignment="Center" AcceptsReturn="True">
+                Exam details here: subject title, paper number, start, and end times
+            </TextBox>
         </Viewbox>
     </Grid>
 </Window>

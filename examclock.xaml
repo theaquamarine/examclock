@@ -3,8 +3,23 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   Title="MainWindow">
     <Grid>
-        <Viewbox>
-            <TextBlock Name="Clock"></TextBlock>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <Viewbox Grid.Column='0'>
+            <TextBlock Name="Clock">12:00</TextBlock>
+        </Viewbox>
+
+        <GridSplitter Grid.Column='1' Width="5" HorizontalAlignment="Stretch" ShowsPreview="True"/>
+
+        <Viewbox Grid.Column='2'>
+            <StackPanel Orientation="Vertical">
+                <Label>Centre:</Label>
+                <TextBox Name="CentreNumber" VerticalAlignment="Center" TextAlignment="Center" MaxLength='5' Text="00000"/>
+            </StackPanel>
         </Viewbox>
     </Grid>
 </Window>

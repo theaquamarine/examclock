@@ -8,18 +8,28 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
 
         <Viewbox Grid.Column='0'>
             <TextBlock Name="Clock">12:00</TextBlock>
         </Viewbox>
 
         <GridSplitter Grid.Column='1' Width="5" HorizontalAlignment="Stretch" ShowsPreview="True"/>
+        <GridSplitter Grid.Row='1' Grid.ColumnSpan='3' Height="5" HorizontalAlignment="Stretch" ShowsPreview="True"/>
 
         <Viewbox Grid.Column='2'>
             <StackPanel Orientation="Vertical">
                 <Label>Centre:</Label>
                 <TextBox Name="CentreNumber" VerticalAlignment="Center" TextAlignment="Center" MaxLength='5' Text="00000"/>
             </StackPanel>
+        </Viewbox>
+
+        <Viewbox Grid.Row="2" Grid.ColumnSpan="3">
+            <TextBox AcceptsReturn="True">Exam details here</TextBox>
         </Viewbox>
     </Grid>
 </Window>

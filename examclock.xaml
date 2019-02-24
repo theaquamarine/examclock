@@ -4,7 +4,7 @@
   Title="MainWindow">
     <Grid>
         <Viewbox>
-            <TextBlock Name="Clock">CLOCK</TextBlock>
+            <TextBlock Name="Clock"></TextBlock>
         </Viewbox>
     </Grid>
 </Window>

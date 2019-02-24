@@ -23,7 +23,8 @@
 
         <Viewbox Grid.Column='2'>
             <StackPanel Orientation="Vertical">
-                <Label>Centre:</Label>
+                <TextBlock Name="Date" TextAlignment="Center">01/01/2019</TextBlock>
+                <Label HorizontalContentAlignment="Center" Padding="0">Centre:</Label>
                 <TextBox Name="CentreNumber" VerticalAlignment="Center" TextAlignment="Center" MaxLength='5' Text="00000"/>
             </StackPanel>
         </Viewbox>

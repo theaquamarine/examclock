@@ -1,7 +1,7 @@
 ﻿<Window
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-  Title="MainWindow">
+  Title="examclock">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -30,7 +30,7 @@
         </Viewbox>
 
         <Viewbox Grid.Row="2" Grid.ColumnSpan="3">
-            <TextBox TextAlignment="Center" AcceptsReturn="True">
+            <TextBox Name="ExamDetails" TextAlignment="Center" AcceptsReturn="True">
                 Exam details here: subject title, paper number, start, and end times
             </TextBox>
         </Viewbox>

@@ -22,6 +22,26 @@ function Update-Time {
     $date.Text = "$(Get-Date -Format d)"
 }
 
+# Add some placeholder text. Sure would be nice if we could use TextBox.PlaceholderText
+$centreNumberBox = $window.FindName("CentreNumber")
+$centreNumberPlaceholder = '00000'
+$centreNumberBox.Add_GotFocus({
+    if ($centreNumberBox.Text -eq $centreNumberPlaceholder) {$centreNumberBox.Text = ''}
+})
+$centreNumberBox.Add_LostFocus({
+    if ($centreNumberBox.Text -eq '') {$centreNumberBox.Text = $centreNumberPlaceholder}
+})
+
+$examDetailsBox = $window.FindName("ExamDetails")
+$examDetailsPlaceholder = 'Exam details here: subject title, paper number, start, and end times'
+$examDetailsBox.Add_GotFocus({
+    if ($examDetailsBox.Text -eq $examDetailsPlaceholder) {$examDetailsBox.Text = ''}
+})
+$examDetailsBox.Add_LostFocus({
+    if ($examDetailsBox.Text -eq '') {$examDetailsBox.Text = $examDetailsPlaceholder}
+})
+
+
 $window.Add_SourceInitialized({
     $timer = New-Object System.Windows.Threading.DispatcherTimer
     $timer.Interval = New-TimeSpan -Seconds 1

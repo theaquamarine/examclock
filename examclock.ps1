@@ -18,7 +18,7 @@ $clock = $window.FindName('Clock')
 $date = $window.FindName('Date')
 
 function Update-Time {
-    $clock.Text = "$(Get-Date -Format t)" # 12-hour clock without seconds probably preferable
+    $clock.Text = "$(Get-Date -Format T)"
     $date.Text = "$(Get-Date -Format d)"
 }
 

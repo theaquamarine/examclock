@@ -12,8 +12,13 @@
 Add-Type -AssemblyName PresentationFramework
 
 $xamlPath = if ($PSScriptRoot) {$PSScriptRoot} else {Get-Location}
-[xml]$xaml = Get-Content -Path (Join-Path $xamlPath 'examclock.xaml')
-$window = [Windows.Markup.XamlReader]::Load((New-Object System.Xml.XmlNodeReader $xaml))
+try {
+    [xml]$xaml = Get-Content -Path $xamlPath -ErrorAction Stop
+    $window = [Windows.Markup.XamlReader]::Load((New-Object System.Xml.XmlNodeReader $xaml))
+} catch {
+    Write-Error "Error reading $xamlPath, exiting"
+    exit 1
+}
 
 $clock = $window.FindName('Clock')
 $date = $window.FindName('Date')

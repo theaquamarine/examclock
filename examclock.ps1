@@ -12,6 +12,8 @@
 Add-Type -AssemblyName PresentationFramework
 
 $xamlPath = if ($PSScriptRoot) {$PSScriptRoot} else {Get-Location}
+$xamlPath = Join-Path $xamlPath 'examclock.xaml'
+
 try {
     [xml]$xaml = Get-Content -Path $xamlPath -ErrorAction Stop
     $window = [Windows.Markup.XamlReader]::Load((New-Object System.Xml.XmlNodeReader $xaml))

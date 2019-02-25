@@ -15,7 +15,7 @@ _[JCQ Instructions for Conduction Examinations, Section 11](https://www.jcq.org.
 
 `powershell examclock.ps1`
 
-Alternatively, packages nicely with [PS2EXE-GUI](https://gallery.technet.microsoft.com/scriptcenter/PS2EXE-GUI-Convert-e7cb69d5).
+Alternatively, packages with [PS2EXE-GUI](https://gallery.technet.microsoft.com/scriptcenter/PS2EXE-GUI-Convert-e7cb69d5): `ps2exe.ps1 .\examclock.ps1 .\examclock.exe -verbose -noConsole` and distribute examclock.xaml with the .exe
 
 - The packaged version works as a Custom User Interface via [Group Policy](https://getadmx.com/?Category=Windows_10_2016&Policy=Microsoft.Policies.WindowsLogon2::CustomShell)
 - It probably works using [Shell Launcher](https://docs.microsoft.com/en-us/windows-hardware/customize/enterprise/shell-launcher), though I've not tried.

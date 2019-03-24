@@ -1,5 +1,7 @@
 A clock/display for UK examinations, aimed to meet JCQ rules.
 
+![Screenshot](examclock.png)
+
 _[JCQ Instructions for Conduction Examinations, Section 11](https://www.jcq.org.uk/exams-office/ice---instructions-for-conducting-examinations/instructions-for-conducting-examinations-2018-2019)_
 
 11.7 A reliable clock (analogue or digital) must be visible to each candidate in the examination room.

@@ -7,6 +7,10 @@
     <RootNamespace>MyApplication</RootNamespace>
     <AssemblyName>MyApplication</AssemblyName>
     <Name>examclock</Name>
+    <PackageEntryPoint>examclock.ps1</PackageEntryPoint>
+    <DotNetVersion>v4.7.2</DotNetVersion>
+    <PackageType>Console</PackageType>
+    <PackageAsExecutable>False</PackageAsExecutable>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

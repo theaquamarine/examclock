@@ -11,7 +11,7 @@ namespace examclock
     public partial class MainWindow : Window
     {
         [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        public static extern void SetThreadExecutionState(uint esFlags);
+        private static extern void SetThreadExecutionState(uint esFlags);
 
         uint ES_CONTINUOUS = 0x80000000;
         uint ES_DISPLAY_REQUIRED = 0x00000002;

@@ -1,4 +1,4 @@
-A clock/display for UK examinations, aimed to meet JCQ rules.
+A clock/display for examinations, aimed to meet JCQ rules.
 
 ![Screenshot](examclock.png)
 
@@ -15,13 +15,10 @@ _[JCQ Instructions for Conduction Examinations, Section 11](https://www.jcq.org.
 
 ## Running
 
-`powershell examclock.ps1`
+`examclock.exe` and an MSI installer are available on [the releases page](https://github.com/theaquamarine/examclock/releases).
 
-Alternatively, packages with [PS2EXE-GUI](https://gallery.technet.microsoft.com/scriptcenter/PS2EXE-GUI-Convert-e7cb69d5): `ps2exe.ps1 .\examclock.ps1 .\examclock.exe -verbose -noConsole` and distribute examclock.xaml with the .exe
+## Configuration
 
-- The packaged version works as a Custom User Interface via [Group Policy](https://getadmx.com/?Category=Windows_10_2016&Policy=Microsoft.Policies.WindowsLogon2::CustomShell)
-- It probably works using [Shell Launcher](https://docs.microsoft.com/en-us/windows-hardware/customize/enterprise/shell-launcher), though I've not tried.
+The centre number displayed by default can be set using a string value for `CentreNumber` on the registry keys `SOFTWARE\examclock` in HKEY_CURRENT_USER or HKEY_LOCAL_MACHINE.
 
-#### Requirements
-
-The GUI is built using WPF, so this only runs on Windows. For the same reason, this cannot run in PowerShell's constrained language mode.
+HKCU is prioritised over HKLM, and a centre number set by the user will be saved there.

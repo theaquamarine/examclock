@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Threading;
@@ -16,7 +17,6 @@ namespace examclock
         uint ES_CONTINUOUS = 0x80000000;
         uint ES_DISPLAY_REQUIRED = 0x00000002;
 
-        string CentreNumberPlaceholder;
         string ExamDetailsPlaceholder;
 
         public MainWindow()
@@ -32,9 +32,15 @@ namespace examclock
             Timer.Tick += new EventHandler(UpdateTime);
             Timer.Start();
 
-            CentreNumberPlaceholder = CentreNumber.Text;
-            CentreNumber.GotFocus += CentreNumber_GotFocus;
-            CentreNumber.LostFocus += CentreNumber_LostFocus;
+            RegistryKey UserKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\examclock");
+            RegistryKey MachineKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\examclock");
+
+            // Set CentreNumber from, in order of precedence, HKCU, HKLM, "00000"
+            string UserCentreNumber = UserKey?.GetValue("CentreNumber")?.ToString();
+            string MachineCentreNumber = MachineKey?.GetValue("CentreNumber")?.ToString();
+            CentreNumber.Text = UserCentreNumber ?? MachineCentreNumber ?? CentreNumber.Text;
+
+            CentreNumber.TextChanged += CentreNumber_TextChanged;
 
             ExamDetailsPlaceholder = ExamDetails.Text;
             ExamDetails.GotFocus += ExamDetails_GotFocus;
@@ -72,14 +78,10 @@ namespace examclock
             Date.Text = DateTime.Now.ToShortDateString();
         }
 
-        private void CentreNumber_GotFocus(object sender, EventArgs e)
+        private void CentreNumber_TextChanged(object sender, EventArgs e)
         {
-            if (CentreNumber.Text.Equals(CentreNumberPlaceholder)) {CentreNumber.Text = "";}
-        }
-
-        private void CentreNumber_LostFocus(object sender, EventArgs e)
-        {
-            if (CentreNumber.Text.Equals("")) { CentreNumber.Text = CentreNumberPlaceholder; }
+            RegistryKey UserKey = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\examclock");
+            UserKey.SetValue("CentreNumber", CentreNumber.Text);
         }
 
         private void ExamDetails_GotFocus(object sender, EventArgs e)

@@ -28,6 +28,9 @@ namespace examclock
         uint ES_CONTINUOUS = 0x80000000;
         uint ES_DISPLAY_REQUIRED = 0x00000002;
 
+        string CentreNumberPlaceholder;
+        string ExamDetailsPlaceholder;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -40,6 +43,14 @@ namespace examclock
             Timer.Interval = new TimeSpan(0, 0, 1);
             Timer.Tick += new EventHandler(UpdateTime);
             Timer.Start();
+
+            CentreNumberPlaceholder = CentreNumber.Text;
+            CentreNumber.GotFocus += CentreNumber_GotFocus;
+            CentreNumber.LostFocus += CentreNumber_LostFocus;
+
+            ExamDetailsPlaceholder = ExamDetails.Text;
+            ExamDetails.GotFocus += ExamDetails_GotFocus;
+            ExamDetails.LostFocus += ExamDetails_LostFocus;
         }
 
         protected override void OnInitialized(EventArgs e)
@@ -73,6 +84,25 @@ namespace examclock
             Date.Text = DateTime.Now.ToShortDateString();
         }
 
+        private void CentreNumber_GotFocus(object sender, EventArgs e)
+        {
+            if (CentreNumber.Text.Equals(CentreNumberPlaceholder)) {CentreNumber.Text = "";}
+        }
+
+        private void CentreNumber_LostFocus(object sender, EventArgs e)
+        {
+            if (CentreNumber.Text.Equals("")) { CentreNumber.Text = CentreNumberPlaceholder; }
+        }
+
+        private void ExamDetails_GotFocus(object sender, EventArgs e)
+        {
+            if (ExamDetails.Text.Equals(ExamDetailsPlaceholder)) { ExamDetails.Text = ""; }
+        }
+
+        private void ExamDetails_LostFocus(object sender, EventArgs e)
+        {
+            if (ExamDetails.Text.Equals("")) { ExamDetails.Text = ExamDetailsPlaceholder; }
+        }
 
     }
 }

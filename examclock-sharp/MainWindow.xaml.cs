@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace examclock
 {
@@ -26,7 +27,20 @@ namespace examclock
 
             Clock.Text = DateTime.Now.ToLongTimeString();
             Date.Text = DateTime.Now.ToShortDateString();
-            
+
+            DispatcherTimer Timer = new DispatcherTimer();
+
+            Timer.Interval = new TimeSpan(0, 0, 1);
+            Timer.Tick += new EventHandler(UpdateTime);
+            Timer.Start();
         }
+
+        private void UpdateTime(object sender, EventArgs e)
+        {
+            Clock.Text = DateTime.Now.ToLongTimeString();
+            Date.Text = DateTime.Now.ToShortDateString();
+        }
+
+
     }
 }
